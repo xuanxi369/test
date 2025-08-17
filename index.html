@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>GitHub 文件加速</title>
+  <style>
+    /* 全局样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      text-align: center;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .url-input {
+      position: relative;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .url-input input {
+      width: 100%;
+      padding: 14px 10px;
+      font-size: 16px;
+      color: #fff;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid rgba(255,255,255,0.3);
+      transition: border-color 0.3s;
+    }
+
+    .url-input input:focus {
+      outline: none;
+      border-bottom: 2px solid #00bfb3;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 0;
+      background: #00bfb3;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,191,179,0.4);
+    }
+
+    .btn:hover {
+      background: #00a79e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,191,179,0.6);
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #bfbfbf;
+      text-align: left;
+      width: 100%;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #9a9a9a;
+      text-align: center;
+    }
+
+    /* 特别鸣谢 */
+    .thanks {
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    .thanks h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+.thanks-logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.thanks-logos .logo-card {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.thanks-logos img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.8); /* 默认灰白 */
+  transition: all 0.3s ease;
+}
+
+.thanks-logos span {
+  font-size: 13px;
+  color: #cfcfcf;
+  transition: color 0.3s ease;
+}
+
+.thanks-logos .logo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.thanks-logos .logo-card:hover img {
+  filter: grayscale(0%) brightness(1); /* 悬停彩色 */
+  transform: scale(1.1);
+}
+
+.thanks-logos .logo-card:hover span {
+  color: #00bfb3; /* 悬停时文字高亮 */
+}
+
+
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      .card {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+  <script>
+    function toSubmit(e) {
+      e.preventDefault();
+      const val = document.getElementsByName('q')[0].value;
+      window.open(location.href.substr(0, location.href.lastIndexOf('/') + 1) + val);
+      return false;
+    }
+  </script>
+</head>
+<body>
+  <div class="card">
+    <h1>GitHub 文件加速</h1>
+    <form onsubmit="toSubmit(event)" target="_blank" style="width: 100%;">
+      <div class="url-input">
+        <input type="text" name="q" placeholder="粘贴 GitHub 文件链接"
+          pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob|raw|suites)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$"
+          required>
+      </div>
+      <button type="submit" class="btn">立即下载</button>
+    </form>
+    <div class="info">
+      <p>✔ 支持 release、archive 以及单文件链接</p>
+      <p>✔ GitHub 文件链接可带或不带协议头</p>
+      <p>✔ 右键复制的链接均符合标准</p>
+    </div>
+    <div class="footer">项目基于 Cloudflare Workers</div>
+
+<!-- 特别鸣谢 -->
+<div class="thanks">
+  <h2>特别鸣谢</h2>
+  <div class="thanks-logos">
+    <div class="logo-card">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/cloudflare.svg" alt="Cloudflare">
+      <span>Cloudflare</span>
+    </div>
+    <div class="logo-card">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub">
+      <span>GitHub</span>
+    </div>
+    <div class="logo-card">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/visualstudiocode.svg" alt="VS Code">
+      <span>VSCode</span>
+    </div>
+    <div class="logo-card">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoft.svg" alt="Microsoft">
+      <span>Microsoft</span>
+    </div>
+    <div class="logo-card">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg" alt="Google">
+      <span>Google</span>
+    </div>
+    <div class="logo-card">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/oracle.svg" alt="Oracle">
+      <span>Oracle</span>
+    </div>
+    <div class="logo-card">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg" alt="OpenAI">
+      <span>OpenAI</span>
+    </div>
+    <div class="logo-card">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spacex.svg" alt="Spaceship">
+      <span>Spaceship</span>
+    </div>
+  </div>
+</div>
+
+  </div>
+</body>
+</html>
